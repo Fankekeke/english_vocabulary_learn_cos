@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fank.f1k2.business.dao.DictionaryWordMapper">
+
+    <select id="queryPage" resultType="java.util.LinkedHashMap">
+        SELECT
+        id,
+        word,
+        tag,
+        phonetic_uk,
+        phonetic_us,
+        trans,
+        sentences,
+        phrases,
+        synos,
+        rel_words,
+        etymology,
+        created_at,
+        updated_at
+        FROM
+        dictionary_word
+        WHERE
+        1 = 1
+        <if test="queryFrom.word != null and queryFrom.word != ''">
+            AND word LIKE CONCAT('%',#{queryFrom.word},'%')
+        </if>
+        order by created_at DESC
+    </select>
+</mapper>
